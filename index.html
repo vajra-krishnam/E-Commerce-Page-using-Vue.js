@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="nav-bar"></div>
+
+    <div id="app">
+        <div class="product">
+
+            <div class="product-image">
+                <img v-bind:src="image" alt="">
+            </div>
+
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <a v-bind:href="link">More Products Here!</a>
+                <p v-if="inStock">In Stock</p>
+                <p v-else v-bind:class= "[inStock ? 'nolinethru' :'linethru']" >Out of Stock</p>
+                <ul>
+                    <li v-for="d in details">{{d}}</li>
+                </ul>
+
+                <div v-for="variant in variants" 
+                v-bind:key="variant.variantId" 
+                class= "color-box"
+                v-bind:style="{ backgroundColor: variant.variantColor }"
+                v-on:mouseover="updateColor(variant.variantImage)">
+                </div>
+
+                <!-- <button v-on:click="addtoCart"></button> -->
+                <button v-on:click="addtoCart" v-bind:disabled="!inStock" 
+                v-bind:class="{disabledButton: !inStock}"
+                class="button button1">Add to Cart</button>
+                <button class="button button2">Cart({{cartValue}})</button>
+                
+
+            </div>
+            
+
+        </div>
+    </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="main.js"></script>
+
+
+</body>
+</html>
